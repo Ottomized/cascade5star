@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Star Rides | Luxury Tesla Chauffeur in Central Oregon</title>
+    <meta name="description" content="Experience the ultimate luxury car service in Central Oregon. From winery tours to airport transfers in a premium Tesla Model Y.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+    <!-- Vercel Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">5 STAR <span>RIDES</span></div>
+        <ul class="nav-links">
+            <li><a href="#experiences">Experiences</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#bitcoin">Bitcoin</a></li>
+            <li><a href="tel:5414503693" class="phone-link">541-450-3693</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <i data-lucide="menu"></i>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Elevating Your Journey.</h1>
+            <p>Modern. Minimalist. Unparalleled Luxury.</p>
+            <div class="hero-cta">
+                <a href="tel:541-450-3693" class="btn primary">Book Your Ride</a>
+                <a href="#experiences" class="btn secondary">Explore Experiences</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="experiences" class="experiences">
+        <div class="container">
+            <h2 class="section-title">Signature Experiences</h2>
+            <p class="section-subtitle">Beyond just a ride, we offer a memory.</p>
+            
+            <div class="experience-grid">
+                <!-- The Alfred -->
+                <div class="experience-card">
+                    <div class="card-image" style="background-image: url('assets/alfred.png')"></div>
+                    <div class="card-content">
+                        <h3>The Alfred</h3>
+                        <p>I greet you, stay available if needed, and set the mood with classical guitar.</p>
+                        <span class="experience-tag">Refined</span>
+                    </div>
+                </div>
+
+                <!-- The Local Tour -->
+                <div class="experience-card">
+                    <div class="card-image" style="background-image: url('assets/user_tesla/local_tours.jpg')"></div>
+                    <div class="card-content">
+                        <h3>The Local Tour</h3>
+                        <p>Discover Central Oregon through the eyes of a local with curated facts and tips.</p>
+                        <span class="experience-tag">Discovery</span>
+                    </div>
+                </div>
+
+                <!-- The Therapy Ride -->
+                <div class="experience-card">
+                    <div class="card-image" style="background-image: url('assets/user_tesla/therapy.jpg')"></div>
+                    <div class="card-content">
+                        <h3>The Therapy Ride</h3>
+                        <p>Got something on your mind? I'm here to listen and help you decompress.</p>
+                        <span class="experience-tag">Calm</span>
+                    </div>
+                </div>
+
+                <!-- Car-Eokee -->
+                <div class="experience-card">
+                    <div class="card-image karaoke-fallback">
+                        <i data-lucide="mic"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Car-Eokee Ride</h3>
+                        <p>Your favorite music, as loud as you want. Singing is optional but highly encouraged.</p>
+                        <span class="experience-tag">Energetic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <div class="services-wrapper">
+                <div class="services-info">
+                    <h2 class="section-title">Luxury Transfers</h2>
+                    <p>Operating a premium Tesla Model Y, we provide silent, smooth, and sustainable transportation across the region.</p>
+                    <ul class="services-list">
+                        <li><i data-lucide="plane"></i> Airport Transfers</li>
+                        <li><i data-lucide="briefcase"></i> Corporate Travel</li>
+                        <li><i data-lucide="heart"></i> Weddings & Events</li>
+                        <li><i data-lucide="map-pin"></i> City Tours</li>
+                        <li><i data-lucide="glass-water"></i> Winery Tours</li>
+                    </ul>
+                </div>
+                <div class="services-image">
+                    <img src="assets/user_tesla/luxury_tours.jpg" alt="Tesla Model Y Luxury Chauffeur">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bitcoin" class="bitcoin-promo">
+        <div class="container">
+            <div class="promo-card">
+                <div class="promo-icon">
+                    <i data-lucide="bitcoin"></i>
+                </div>
+                <h2>The Future of Payment</h2>
+                <p>Ask me how to save <strong>30%</strong> on your next ride by paying in Bitcoin.</p>
+                <div class="promo-accent"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <h2 class="section-title">Fare Estimate</h2>
+            <p class="section-subtitle">Get an instant quote for your luxury ride.</p>
+            
+            <div class="calculator-card">
+                <div class="input-group">
+                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="map-pin"></i></span>
+                    <input type="text" id="pickup-input" placeholder="Enter pickup location" autocomplete="off" spellcheck="false">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="navigation"></i></span>
+                    <input type="text" id="dropoff-input" placeholder="Enter drop-off location" autocomplete="off" spellcheck="false">
+                </div>
+                <button type="button" id="calculate-btn" class="btn primary calculator-btn">Calculate Fare</button>
+                
+                <div id="calculator-result" class="calculator-result hidden">
+                    <div class="result-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Distance</span>
+                            <span id="result-distance" class="detail-value">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Est. Time</span>
+                            <span id="result-time" class="detail-value">--</span>
+                        </div>
+                    </div>
+                    <div class="result-price">
+                        <span class="price-label">Estimated Fare</span>
+                        <span id="result-fare" class="price-value">$0.00</span>
+                    </div>
+                    <p class="result-disclaimer">*This is an estimate based on optimal routing. Actual fares may vary.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking-section">
+        <div class="container">
+            <div class="booking-grid">
+                <div class="booking-info">
+                    <h2 class="section-title">Ready to Ride?</h2>
+                    <p>Scan the code or click the button below to call and book your ride.</p>
+                    <a href="tel:541-450-3693" class="btn primary">Call to Book</a>
+                    <div class="contact-footer">
+                        <p>Direct Booking / Inquiries:</p>
+                        <a href="tel:5414503693" class="phone-number">541-450-3693</a>
+                    </div>
+                </div>
+                <div class="qr-container">
+                    <div id="qrcode"></div>
+                    <p>541-450-3693</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">5 STAR <span>RIDES</span></div>
+                <p>&copy; 2026 Cascade Luxury Rides. All rights reserved.</p>
+                <div class="footer-socials">
+                    <i data-lucide="instagram"></i>
+                    <i data-lucide="facebook"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- QRCode.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADKQ9AxqtAUEA3I5Em0Qyv9WGWX_fEbf8&libraries=places&loading=async" defer></script>
+    
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

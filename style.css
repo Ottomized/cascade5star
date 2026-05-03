@@ -1,0 +1,588 @@
+:root {
+    --primary: #ffffff;
+    --secondary: #e5e5e5;
+    --accent: #c5a059; /* Gold accent */
+    --bg-dark: #000000;
+    --bg-card: #0a0a0a;
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --font-main: 'Outfit', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    backdrop-filter: blur(5px);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--accent);
+    font-weight: 300;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+.phone-link {
+    font-weight: 700;
+    color: var(--accent) !important;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: url('assets/user_tesla/hero.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    letter-spacing: -2px;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 18px 40px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn.primary {
+    background-color: var(--primary);
+    color: black;
+}
+
+.btn.secondary {
+    border: 1px solid var(--glass-border);
+    color: white;
+    margin-left: 20px;
+}
+
+.btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+}
+
+/* Experiences */
+.experiences {
+    padding: 120px 0;
+    background-color: var(--bg-dark);
+}
+
+.section-title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 60px;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.experience-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+}
+
+.card-image {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+.karaoke-fallback {
+    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.karaoke-fallback i {
+    width: 60px;
+    height: 60px;
+    color: var(--accent);
+}
+
+.card-content {
+    padding: 30px;
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.card-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.experience-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* Services */
+.services {
+    padding: 120px 0;
+    background-color: #050505;
+}
+
+.services-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.services-list {
+    list-style: none;
+    margin-top: 40px;
+}
+
+.services-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+.services-list i {
+    color: var(--accent);
+    width: 24px;
+}
+
+.services-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+
+/* Bitcoin Promo */
+.bitcoin-promo {
+    padding: 80px 0;
+}
+
+.promo-card {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    padding: 60px;
+    border-radius: 30px;
+    text-align: center;
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-icon i {
+    width: 60px;
+    height: 60px;
+    color: #F7931A; /* Bitcoin Orange */
+    margin-bottom: 20px;
+}
+
+.promo-card h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.promo-card p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+.promo-card strong {
+    color: var(--accent);
+    font-size: 1.8rem;
+}
+
+.promo-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, transparent, var(--accent), transparent);
+}
+
+/* Booking Section */
+.booking-section {
+    padding: 120px 0;
+}
+
+.booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background: #0a0a0a;
+    padding: 80px;
+    border-radius: 30px;
+}
+
+.qr-container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: black;
+}
+
+#qrcode {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.contact-footer {
+    margin-top: 60px;
+}
+
+.phone-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* Footer */
+.footer {
+    padding: 60px 0;
+    border-top: 1px solid var(--glass-border);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-socials i {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.footer-socials i:hover {
+    color: var(--accent);
+}
+
+/* Calculator Section */
+.calculator-section {
+    padding: 80px 0;
+    background-color: var(--bg-dark);
+}
+
+.calculator-card {
+    background: linear-gradient(135deg, #0a0a0a 0%, #151515 100%);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.input-group-icon svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.input-group input {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.03);
+    background-image: none !important;
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 18px 20px 18px 55px;
+    color: var(--text-main);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Google Places adds .pac-target-input and can apply background art; keep a flat fill */
+.input-group input.pac-target-input {
+    background-image: none !important;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: rgba(255, 255, 255, 0.05);
+    background-image: none !important;
+}
+
+.input-group input:-webkit-autofill,
+.input-group input:-webkit-autofill:hover,
+.input-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-main);
+    caret-color: var(--text-main);
+    box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.03) inset !important;
+    transition: background-color 99999s ease-out 0s;
+}
+
+.input-group input:-webkit-autofill:focus {
+    box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.05) inset !important;
+}
+
+.calculator-btn {
+    width: 100%;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    user-select: none;
+    caret-color: transparent;
+}
+
+.calculator-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.calculator-result {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid var(--glass-border);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.calculator-result.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.result-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detail-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.result-price {
+    text-align: center;
+    background: rgba(197, 160, 89, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.price-label {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.price-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.result-disclaimer {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* Pac Container (Google Maps Autocomplete) Styling */
+.pac-container {
+    background-color: #1a1a1a;
+    border: 1px solid var(--glass-border);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    font-family: var(--font-main);
+}
+.pac-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: var(--text-main);
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+.pac-item:hover {
+    background-color: rgba(255,255,255,0.05);
+}
+.pac-item-query {
+    color: var(--accent);
+    font-weight: 600;
+}
+.pac-icon {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .hero-content h1 { font-size: 3.5rem; }
+    .services-wrapper, .booking-grid { grid-template-columns: 1fr; }
+    .services-image { order: -1; }
+    .nav-links { display: none; }
+    .menu-toggle { display: block; }
+}
