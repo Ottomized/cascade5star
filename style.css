@@ -62,10 +62,11 @@ body {
 }
 
 .site-logo {
-    height: 180px;
+    height: 160px;
     width: auto;
     display: block;
     border-radius: 4px;
+    margin: -35px 0;
 }
 
 .nav-links {
