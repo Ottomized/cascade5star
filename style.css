@@ -439,9 +439,12 @@ body {
 .input-group gmp-place-autocomplete {
     display: block;
     width: 100%;
+    min-width: 0;
+    max-width: 100%;
     position: relative;
     z-index: 1;
     color-scheme: dark;
+    overflow: hidden;
 }
 
 .input-group gmp-place-autocomplete::part(input) {
@@ -983,4 +986,12 @@ a.logo {
     .services-image { order: -1; }
     .nav-links { display: none; }
     .menu-toggle { display: block; }
+}
+
+@media (max-width: 600px) {
+    .calculator-card { padding: 20px; }
+    .booking-grid { padding: 30px 20px; }
+    .schedule-row { grid-template-columns: 1fr; }
+    .winery-hero .hero-content h1 { font-size: 2.5rem; }
+    .directory-grid { grid-template-columns: 1fr; }
 }
