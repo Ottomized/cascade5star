@@ -590,6 +590,78 @@ body {
     margin-top: 20px;
 }
 
+/* Add Stop button */
+.add-stop-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px dashed var(--glass-border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.add-stop-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.add-stop-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+/* Stop remove button */
+.stop-group {
+    display: flex;
+    align-items: center;
+}
+
+.stop-remove-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0 8px;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+}
+
+.stop-remove-btn:hover {
+    color: #ff4444;
+}
+
+/* Schedule section */
+.schedule-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin: 25px 0 12px;
+}
+
+.schedule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* Date & time inputs */
+.input-group input[type="date"],
+.input-group input[type="time"] {
+    color-scheme: dark;
+    cursor: pointer;
+}
+
 .booking-step-title {
     font-size: 1.5rem;
     font-weight: 600;

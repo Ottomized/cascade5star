@@ -2,24 +2,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const WEB3FORMS_KEY = '9a7c5878-9777-40a3-95b8-8faac6537dfa';
     const PER_MILE = 2.50;
 
-    // State
     let calculatedData = {};
+    let stopCount = 0;
 
     // Elements
-    const pickupInput = document.getElementById('pickup-input');
-    const dropoffInput = document.getElementById('dropoff-input');
-    const calculateBtn = document.getElementById('calculate-btn');
+    const pickupInput    = document.getElementById('pickup-input');
+    const dropoffInput   = document.getElementById('dropoff-input');
+    const stopsContainer = document.getElementById('stops-container');
+    const addStopBtn     = document.getElementById('add-stop-btn');
+    const calculateBtn   = document.getElementById('calculate-btn');
     const resultContainer = document.getElementById('calculator-result');
-    const resultDistance = document.getElementById('result-distance');
-    const resultTime = document.getElementById('result-time');
-    const resultFare = document.getElementById('result-fare');
-    const stepCalculator = document.getElementById('step-calculator');
-    const stepThankyou = document.getElementById('step-thankyou');
-    const customerName = document.getElementById('customer-name');
-    const customerPhone = document.getElementById('customer-phone');
-    const confirmBtn = document.getElementById('confirm-btn');
+    const resultDistance  = document.getElementById('result-distance');
+    const resultTime      = document.getElementById('result-time');
+    const resultFare      = document.getElementById('result-fare');
+    const rideDate        = document.getElementById('ride-date');
+    const rideTime        = document.getElementById('ride-time');
+    const customerName    = document.getElementById('customer-name');
+    const customerPhone   = document.getElementById('customer-phone');
+    const confirmBtn      = document.getElementById('confirm-btn');
+    const stepCalculator  = document.getElementById('step-calculator');
+    const stepThankyou    = document.getElementById('step-thankyou');
 
-    // Navbar scroll
+    // Set min date to today
+    rideDate.min = new Date().toISOString().split('T')[0];
+
+    // --- Navbar scroll ---
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         navbar.style.background = window.scrollY > 50
@@ -28,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
         navbar.style.padding = window.scrollY > 50 ? '20px 40px' : '30px 40px';
     });
 
-    // Mobile menu
+    // --- Mobile menu ---
     const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
+    const navLinks   = document.querySelector('.nav-links');
     if (menuToggle) {
         menuToggle.addEventListener('click', () => {
             const open = navLinks.style.display === 'flex';
@@ -45,7 +52,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Step 1: Fare Calculator ---
+    // --- Add / Remove Stops ---
+    addStopBtn.addEventListener('click', () => {
+        stopCount++;
+        const id = `stop-${stopCount}`;
+
+        const group = document.createElement('div');
+        group.className = 'input-group stop-group';
+        group.id = id;
+        group.innerHTML = `
+            <span class="input-group-icon" aria-hidden="true"><i data-lucide="map-pin"></i></span>
+            <gmp-place-autocomplete class="stop-input" placeholder="Add a stop" country-restrictions="us"></gmp-place-autocomplete>
+            <button type="button" class="stop-remove-btn" aria-label="Remove stop">✕</button>
+        `;
+        group.querySelector('.stop-remove-btn').addEventListener('click', () => group.remove());
+        stopsContainer.appendChild(group);
+        lucide.createIcons();
+    });
+
+    // --- Calculate Fare (uses DirectionsService for multi-stop support) ---
     const initCalculator = () => {
         if (typeof google === 'undefined' || !google.maps) {
             setTimeout(initCalculator, 300);
@@ -53,8 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         calculateBtn.addEventListener('click', () => {
-            const origin = pickupInput.value;
-            const destination = dropoffInput.value;
+            const origin      = pickupInput.value.trim();
+            const destination = dropoffInput.value.trim();
+            const stopInputs  = Array.from(document.querySelectorAll('.stop-input'));
+            const waypoints   = stopInputs
+                .map(el => el.value.trim())
+                .filter(v => v)
+                .map(location => ({ location, stopover: true }));
 
             if (!origin || !destination) {
                 alert('Please enter both pickup and drop-off locations.');
@@ -64,40 +94,47 @@ document.addEventListener('DOMContentLoaded', () => {
             calculateBtn.textContent = 'Calculating...';
             calculateBtn.disabled = true;
 
-            new google.maps.DistanceMatrixService().getDistanceMatrix({
-                origins: [origin],
-                destinations: [destination],
-                travelMode: 'DRIVING',
+            new google.maps.DirectionsService().route({
+                origin,
+                destination,
+                waypoints,
+                travelMode: google.maps.TravelMode.DRIVING,
                 unitSystem: google.maps.UnitSystem.IMPERIAL,
-            }, (response, status) => {
+            }, (result, status) => {
                 calculateBtn.textContent = 'Calculate Fare';
                 calculateBtn.disabled = false;
 
                 if (status !== 'OK') {
-                    alert('Error communicating with routing service. Please try again.');
+                    alert('Could not calculate route. Please check your locations and try again.');
                     return;
                 }
 
-                const result = response.rows[0].elements[0];
-                if (result.status !== 'OK') {
-                    alert('Could not calculate driving distance between these locations.');
-                    return;
-                }
+                let totalMeters  = 0;
+                let totalSeconds = 0;
+                result.routes[0].legs.forEach(leg => {
+                    totalMeters  += leg.distance.value;
+                    totalSeconds += leg.duration.value;
+                });
 
-                const distanceMiles = parseFloat(result.distance.text.replace(/[^0-9.]/g, ''));
-                const fare = (distanceMiles * PER_MILE).toFixed(2);
+                const miles       = totalMeters / 1609.344;
+                const hrs         = Math.floor(totalSeconds / 3600);
+                const mins        = Math.round((totalSeconds % 3600) / 60);
+                const distanceText = miles.toFixed(1) + ' mi';
+                const timeText    = hrs > 0 ? `${hrs} hr ${mins} min` : `${mins} min`;
+                const fare        = (miles * PER_MILE).toFixed(2);
 
-                resultDistance.textContent = result.distance.text;
-                resultTime.textContent = result.duration.text;
-                resultFare.textContent = '$' + fare;
+                resultDistance.textContent = distanceText;
+                resultTime.textContent     = timeText;
+                resultFare.textContent     = '$' + fare;
                 resultContainer.classList.remove('hidden');
 
                 calculatedData = {
-                    pickup: origin,
-                    dropoff: destination,
-                    distance: result.distance.text,
-                    duration: result.duration.text,
-                    fare: '$' + fare,
+                    pickup:      origin,
+                    stops:       stopInputs.map(el => el.value.trim()).filter(v => v),
+                    dropoff:     destination,
+                    distance:    distanceText,
+                    duration:    timeText,
+                    fare:        '$' + fare,
                 };
             });
         });
@@ -105,9 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initCalculator();
 
-    // --- Confirm & Send Email ---
+    // --- Confirm Booking ---
     confirmBtn.addEventListener('click', async () => {
-        const name = customerName.value.trim();
+        const name  = customerName.value.trim();
         const phone = customerPhone.value.trim();
 
         if (!name || !phone) {
@@ -115,20 +152,33 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const date = rideDate.value;
+        const time = rideTime.value;
+        const scheduled = date && time
+            ? new Date(`${date}T${time}`).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })
+            : date ? new Date(date + 'T12:00').toLocaleDateString('en-US', { dateStyle: 'full' })
+            : 'ASAP';
+
+        const stopsLine = calculatedData.stops.length > 0
+            ? calculatedData.stops.map((s, i) => `Stop ${i + 1}: ${s}`).join('\n')
+            : 'None';
+
         confirmBtn.textContent = 'Sending...';
         confirmBtn.disabled = true;
 
         const formData = new FormData();
-        formData.append('access_key', WEB3FORMS_KEY);
-        formData.append('subject', `New Booking Request from ${name}`);
-        formData.append('from_name', '5 Star Rides');
-        formData.append('name', name);
-        formData.append('phone', phone);
-        formData.append('pickup', calculatedData.pickup);
-        formData.append('dropoff', calculatedData.dropoff);
-        formData.append('distance', calculatedData.distance);
-        formData.append('duration', calculatedData.duration);
-        formData.append('fare', calculatedData.fare);
+        formData.append('access_key',  WEB3FORMS_KEY);
+        formData.append('subject',     `New Booking from ${name}`);
+        formData.append('from_name',   '5 Star Rides Booking');
+        formData.append('name',        name);
+        formData.append('phone',       phone);
+        formData.append('pickup',      calculatedData.pickup);
+        formData.append('stops',       stopsLine);
+        formData.append('dropoff',     calculatedData.dropoff);
+        formData.append('distance',    calculatedData.distance);
+        formData.append('duration',    calculatedData.duration);
+        formData.append('fare',        calculatedData.fare);
+        formData.append('scheduled',   scheduled);
 
         try {
             const response = await fetch('https://api.web3forms.com/submit', {

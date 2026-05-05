@@ -31,18 +31,32 @@
             <h2 class="section-title">Book Your Ride</h2>
             <p class="section-subtitle">Get an instant fare estimate, then book in seconds.</p>
 
-            <!-- Step 1: Fare Calculator -->
+            <!-- Calculator & Booking Form -->
             <div id="step-calculator" class="calculator-card">
+
+                <!-- Pickup -->
                 <div class="input-group">
                     <span class="input-group-icon" aria-hidden="true"><i data-lucide="map-pin"></i></span>
                     <gmp-place-autocomplete id="pickup-input" placeholder="Enter pickup location" country-restrictions="us"></gmp-place-autocomplete>
                 </div>
+
+                <!-- Dynamic Stops -->
+                <div id="stops-container"></div>
+
+                <!-- Dropoff -->
                 <div class="input-group">
                     <span class="input-group-icon" aria-hidden="true"><i data-lucide="navigation"></i></span>
                     <gmp-place-autocomplete id="dropoff-input" placeholder="Enter drop-off location" country-restrictions="us"></gmp-place-autocomplete>
                 </div>
+
+                <!-- Add Stop -->
+                <button type="button" id="add-stop-btn" class="add-stop-btn">
+                    <i data-lucide="plus-circle"></i> Add Stop
+                </button>
+
                 <button type="button" id="calculate-btn" class="btn primary calculator-btn">Calculate Fare</button>
 
+                <!-- Result + Booking Fields -->
                 <div id="calculator-result" class="calculator-result hidden">
                     <div class="result-details">
                         <div class="detail-item">
@@ -60,7 +74,21 @@
                     </div>
                     <p class="result-disclaimer">*Estimate based on optimal routing. Actual fares may vary.</p>
 
-                    <div class="input-group" style="margin-top: 25px;">
+                    <!-- Schedule -->
+                    <p class="schedule-label">Schedule Your Ride</p>
+                    <div class="schedule-row">
+                        <div class="input-group">
+                            <span class="input-group-icon" aria-hidden="true"><i data-lucide="calendar"></i></span>
+                            <input type="date" id="ride-date">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-icon" aria-hidden="true"><i data-lucide="clock"></i></span>
+                            <input type="time" id="ride-time">
+                        </div>
+                    </div>
+
+                    <!-- Customer Info -->
+                    <div class="input-group">
                         <span class="input-group-icon" aria-hidden="true"><i data-lucide="user"></i></span>
                         <input type="text" id="customer-name" placeholder="Your Name" autocomplete="name">
                     </div>
@@ -72,7 +100,7 @@
                 </div>
             </div>
 
-            <!-- Step 3: Thank You -->
+            <!-- Thank You -->
             <div id="step-thankyou" class="calculator-card hidden thankyou-card">
                 <i data-lucide="check-circle" class="thankyou-icon"></i>
                 <h2 class="thankyou-title">Thank You!</h2>
