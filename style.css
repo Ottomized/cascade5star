@@ -728,6 +728,52 @@ body {
     font-size: 1.1rem;
 }
 
+.booking-confirmation {
+    margin-top: 30px;
+    width: 100%;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.booking-confirmation div {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.booking-confirmation div span:first-child {
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.booking-confirmation div span:last-child {
+    text-align: right;
+    color: var(--text-main);
+}
+
+.confirmation-divider {
+    border-bottom: 1px solid var(--glass-border) !important;
+    margin: 5px 0;
+}
+
+.confirmation-fare {
+    margin-top: 5px;
+    padding-top: 12px !important;
+}
+
+.confirmation-fare span:first-child {
+    color: var(--accent) !important;
+    font-weight: 600;
+}
+
+.confirmation-fare span:last-child {
+    color: var(--accent) !important;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
 /* Logo as link */
 a.logo {
     text-decoration: none;

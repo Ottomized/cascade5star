@@ -188,6 +188,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (response.ok) {
+                const stopsHtml = calculatedData.stops.length > 0
+                    ? calculatedData.stops.map((s, i) => `<div><span>Stop ${i + 1}</span><span>${s}</span></div>`).join('')
+                    : '';
+
+                document.getElementById('booking-confirmation').innerHTML = `
+                    <div><span>Name</span><span>${name}</span></div>
+                    <div><span>Phone</span><span>${phone}</span></div>
+                    <div class="confirmation-divider"></div>
+                    <div><span>Pickup</span><span>${calculatedData.pickup}</span></div>
+                    ${stopsHtml}
+                    <div><span>Drop-off</span><span>${calculatedData.dropoff}</span></div>
+                    <div class="confirmation-divider"></div>
+                    <div><span>Distance</span><span>${calculatedData.distance}</span></div>
+                    <div><span>Est. Time</span><span>${calculatedData.duration}</span></div>
+                    <div><span>Scheduled</span><span>${scheduled}</span></div>
+                    <div class="confirmation-fare"><span>Estimated Fare</span><span>${calculatedData.fare}</span></div>
+                `;
+
                 stepCalculator.classList.add('hidden');
                 stepThankyou.classList.remove('hidden');
                 lucide.createIcons();
