@@ -408,6 +408,11 @@ body {
 .input-group {
     position: relative;
     margin-bottom: 20px;
+    z-index: 1;
+}
+
+.input-group:focus-within {
+    z-index: 10;
 }
 
 .input-group-icon {
