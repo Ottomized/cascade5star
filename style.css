@@ -436,15 +436,16 @@ body {
     width: 100%;
     position: relative;
     z-index: 1;
+    color-scheme: dark;
 }
 
 .input-group gmp-place-autocomplete::part(input) {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.03);
+    background-color: #111111 !important;
     border: 1px solid var(--glass-border);
     border-radius: 10px;
     padding: 18px 20px 18px 55px;
-    color: var(--text-main);
+    color: #ffffff !important;
     font-family: var(--font-main);
     font-size: 1rem;
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -454,7 +455,7 @@ body {
 
 .input-group gmp-place-autocomplete::part(input):focus {
     border-color: var(--accent);
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #1a1a1a !important;
 }
 
 .calculator-btn {
