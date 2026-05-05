@@ -76,27 +76,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let calculatorInitialized = false;
 
-    // Wait for Google Maps API (including Places library) to fully load
-    const initCalculator = () => {
-        if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
+    // Wait for Google Maps API to be available, then load Places via importLibrary
+    // (required when loading=async is used in the Maps script URL)
+    const initCalculator = async () => {
+        if (typeof google === 'undefined' || !google.maps) {
             setTimeout(initCalculator, 300);
             return;
         }
         if (calculatorInitialized) return;
         calculatorInitialized = true;
 
-        const autocompleteOptions = {
-            componentRestrictions: { country: 'us' },
-        };
-
-        // Initialize Autocomplete with error handling
         try {
-            new google.maps.places.Autocomplete(pickupInput, autocompleteOptions);
-            new google.maps.places.Autocomplete(dropoffInput, autocompleteOptions);
+            const { Autocomplete } = await google.maps.importLibrary('places');
+            const autocompleteOptions = { componentRestrictions: { country: 'us' } };
+            new Autocomplete(pickupInput, autocompleteOptions);
+            new Autocomplete(dropoffInput, autocompleteOptions);
         } catch (e) {
             console.error('Places Autocomplete init failed:', e);
         }
-        
+
         // Custom Pricing Formula (TODO: Adjust based on user needs)
         const BASE_FARE = 50;
         const PER_MILE = 3.50;
