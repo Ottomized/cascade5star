@@ -32,7 +32,7 @@
             <h2 class="section-title">Book Your Ride</h2>
             <p class="section-subtitle">Get an instant fare estimate, then book in seconds.</p>
 
-            <!-- Calculator & Booking Form -->
+            <!-- Calculator & Booking -->
             <div id="step-calculator" class="calculator-card">
 
                 <!-- Pickup -->
@@ -47,7 +47,7 @@
                     <gmp-place-autocomplete id="dropoff-input" placeholder="Enter drop-off location" country-restrictions="us"></gmp-place-autocomplete>
                 </div>
 
-                <!-- Dynamic Stops (added below in order) -->
+                <!-- Dynamic Stops (appended here in order) -->
                 <div id="stops-container"></div>
 
                 <!-- Add Stop -->
@@ -55,9 +55,7 @@
                     <i data-lucide="plus-circle"></i> Add Stop
                 </button>
 
-                <button type="button" id="calculate-btn" class="btn primary calculator-btn">Calculate Fare</button>
-
-                <!-- Result + Booking Fields -->
+                <!-- Fare Result + Booking Fields (shown after calculation) -->
                 <div id="calculator-result" class="calculator-result hidden">
                     <div class="result-details">
                         <div class="detail-item">
@@ -88,7 +86,7 @@
                         </div>
                     </div>
 
-                    <!-- Customer Info -->
+                    <!-- Name & Phone above the button -->
                     <div class="input-group">
                         <span class="input-group-icon" aria-hidden="true"><i data-lucide="user"></i></span>
                         <input type="text" id="customer-name" placeholder="Your Name" autocomplete="name">
@@ -97,8 +95,11 @@
                         <span class="input-group-icon" aria-hidden="true"><i data-lucide="phone"></i></span>
                         <input type="tel" id="customer-phone" placeholder="Your Phone Number" autocomplete="tel">
                     </div>
-                    <button type="button" id="confirm-btn" class="btn primary calculator-btn" style="margin-top: 10px;">Confirm Booking</button>
                 </div>
+
+                <!-- Single action button -->
+                <button type="button" id="main-btn" class="btn primary calculator-btn">Calculate Fare</button>
+
             </div>
 
             <!-- Thank You -->

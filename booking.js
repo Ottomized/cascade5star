@@ -4,13 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let calculatedData = {};
     let stopCount = 0;
+    let fareCalculated = false;
 
     // Elements
-    const pickupInput    = document.getElementById('pickup-input');
-    const dropoffInput   = document.getElementById('dropoff-input');
-    const stopsContainer = document.getElementById('stops-container');
-    const addStopBtn     = document.getElementById('add-stop-btn');
-    const calculateBtn   = document.getElementById('calculate-btn');
+    const pickupInput     = document.getElementById('pickup-input');
+    const dropoffInput    = document.getElementById('dropoff-input');
+    const stopsContainer  = document.getElementById('stops-container');
+    const addStopBtn      = document.getElementById('add-stop-btn');
+    const mainBtn         = document.getElementById('main-btn');
     const resultContainer = document.getElementById('calculator-result');
     const resultDistance  = document.getElementById('result-distance');
     const resultTime      = document.getElementById('result-time');
@@ -19,14 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const rideTime        = document.getElementById('ride-time');
     const customerName    = document.getElementById('customer-name');
     const customerPhone   = document.getElementById('customer-phone');
-    const confirmBtn      = document.getElementById('confirm-btn');
     const stepCalculator  = document.getElementById('step-calculator');
     const stepThankyou    = document.getElementById('step-thankyou');
 
-    // Set min date to today
     rideDate.min = new Date().toISOString().split('T')[0];
 
-    // --- Navbar scroll ---
+    // --- Navbar ---
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         navbar.style.background = window.scrollY > 50
@@ -52,7 +51,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Add / Remove Stops ---
+    // --- Reset fare when locations change ---
+    const resetFare = () => {
+        if (!fareCalculated) return;
+        fareCalculated = false;
+        resultContainer.classList.add('hidden');
+        mainBtn.textContent = 'Calculate Fare';
+    };
+
+    pickupInput.addEventListener('input', resetFare);
+    dropoffInput.addEventListener('input', resetFare);
+
+    // --- Add Stop (uses createElement so gmp-place-autocomplete initialises properly) ---
     addStopBtn.addEventListener('click', () => {
         stopCount++;
         const id = `stop-${stopCount}`;
@@ -60,90 +70,116 @@ document.addEventListener('DOMContentLoaded', () => {
         const group = document.createElement('div');
         group.className = 'input-group stop-group';
         group.id = id;
-        group.innerHTML = `
-            <span class="input-group-icon" aria-hidden="true"><i data-lucide="map-pin"></i></span>
-            <gmp-place-autocomplete class="stop-input" placeholder="Add a stop" country-restrictions="us"></gmp-place-autocomplete>
-            <button type="button" class="stop-remove-btn" aria-label="Remove stop">✕</button>
-        `;
-        group.querySelector('.stop-remove-btn').addEventListener('click', () => group.remove());
+
+        const icon = document.createElement('span');
+        icon.className = 'input-group-icon';
+        icon.setAttribute('aria-hidden', 'true');
+        icon.innerHTML = '<i data-lucide="map-pin"></i>';
+
+        const autocomplete = document.createElement('gmp-place-autocomplete');
+        autocomplete.setAttribute('placeholder', 'Add a stop');
+        autocomplete.setAttribute('country-restrictions', 'us');
+        autocomplete.classList.add('stop-input');
+        autocomplete.addEventListener('input', resetFare);
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'stop-remove-btn';
+        removeBtn.setAttribute('aria-label', 'Remove stop');
+        removeBtn.textContent = '✕';
+        removeBtn.addEventListener('click', () => { group.remove(); resetFare(); });
+
+        group.appendChild(icon);
+        group.appendChild(autocomplete);
+        group.appendChild(removeBtn);
         stopsContainer.appendChild(group);
         lucide.createIcons();
     });
 
-    // --- Calculate Fare (uses DirectionsService for multi-stop support) ---
+    // --- Single button: Calculate → Confirm ---
     const initCalculator = () => {
         if (typeof google === 'undefined' || !google.maps) {
             setTimeout(initCalculator, 300);
             return;
         }
 
-        calculateBtn.addEventListener('click', () => {
-            const origin      = pickupInput.value.trim();
-            const destination = dropoffInput.value.trim();
-            const stopInputs  = Array.from(document.querySelectorAll('.stop-input'));
-            const waypoints   = stopInputs
-                .map(el => el.value.trim())
-                .filter(v => v)
-                .map(location => ({ location, stopover: true }));
-
-            if (!origin || !destination) {
-                alert('Please enter both pickup and drop-off locations.');
-                return;
+        mainBtn.addEventListener('click', async () => {
+            if (!fareCalculated) {
+                runCalculation();
+            } else {
+                runBooking();
             }
-
-            calculateBtn.textContent = 'Calculating...';
-            calculateBtn.disabled = true;
-
-            new google.maps.DirectionsService().route({
-                origin,
-                destination,
-                waypoints,
-                travelMode: google.maps.TravelMode.DRIVING,
-                unitSystem: google.maps.UnitSystem.IMPERIAL,
-            }, (result, status) => {
-                calculateBtn.textContent = 'Calculate Fare';
-                calculateBtn.disabled = false;
-
-                if (status !== 'OK') {
-                    alert('Could not calculate route. Please check your locations and try again.');
-                    return;
-                }
-
-                let totalMeters  = 0;
-                let totalSeconds = 0;
-                result.routes[0].legs.forEach(leg => {
-                    totalMeters  += leg.distance.value;
-                    totalSeconds += leg.duration.value;
-                });
-
-                const miles       = totalMeters / 1609.344;
-                const hrs         = Math.floor(totalSeconds / 3600);
-                const mins        = Math.round((totalSeconds % 3600) / 60);
-                const distanceText = miles.toFixed(1) + ' mi';
-                const timeText    = hrs > 0 ? `${hrs} hr ${mins} min` : `${mins} min`;
-                const fare        = (miles * PER_MILE).toFixed(2);
-
-                resultDistance.textContent = distanceText;
-                resultTime.textContent     = timeText;
-                resultFare.textContent     = '$' + fare;
-                resultContainer.classList.remove('hidden');
-
-                calculatedData = {
-                    pickup:      origin,
-                    stops:       stopInputs.map(el => el.value.trim()).filter(v => v),
-                    dropoff:     destination,
-                    distance:    distanceText,
-                    duration:    timeText,
-                    fare:        '$' + fare,
-                };
-            });
         });
     };
 
     initCalculator();
 
-    // --- Confirm Booking ---
-    confirmBtn.addEventListener('click', async () => {
+    function runCalculation() {
+        const origin      = pickupInput.value.trim();
+        const destination = dropoffInput.value.trim();
+        const stopInputs  = Array.from(document.querySelectorAll('.stop-input'));
+        const waypoints   = stopInputs
+            .map(el => el.value.trim())
+            .filter(v => v)
+            .map(location => ({ location, stopover: true }));
+
+        if (!origin || !destination) {
+            alert('Please enter both pickup and drop-off locations.');
+            return;
+        }
+
+        mainBtn.textContent = 'Calculating...';
+        mainBtn.disabled = true;
+
+        new google.maps.DirectionsService().route({
+            origin,
+            destination,
+            waypoints,
+            travelMode: google.maps.TravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.IMPERIAL,
+        }, (result, status) => {
+            mainBtn.disabled = false;
+
+            if (status !== 'OK') {
+                mainBtn.textContent = 'Calculate Fare';
+                alert('Could not calculate route. Please check your locations and try again.');
+                return;
+            }
+
+            let totalMeters  = 0;
+            let totalSeconds = 0;
+            result.routes[0].legs.forEach(leg => {
+                totalMeters  += leg.distance.value;
+                totalSeconds += leg.duration.value;
+            });
+
+            const miles        = totalMeters / 1609.344;
+            const hrs          = Math.floor(totalSeconds / 3600);
+            const mins         = Math.round((totalSeconds % 3600) / 60);
+            const distanceText = miles.toFixed(1) + ' mi';
+            const timeText     = hrs > 0 ? `${hrs} hr ${mins} min` : `${mins} min`;
+            const fare         = (miles * PER_MILE).toFixed(2);
+
+            resultDistance.textContent = distanceText;
+            resultTime.textContent     = timeText;
+            resultFare.textContent     = '$' + fare;
+            resultContainer.classList.remove('hidden');
+
+            calculatedData = {
+                pickup:   origin,
+                stops:    stopInputs.map(el => el.value.trim()).filter(v => v),
+                dropoff:  destination,
+                distance: distanceText,
+                duration: timeText,
+                fare:     '$' + fare,
+            };
+
+            fareCalculated = true;
+            mainBtn.textContent = 'Confirm Booking';
+        });
+    }
+
+    async function runBooking() {
         const name  = customerName.value.trim();
         const phone = customerPhone.value.trim();
 
@@ -156,15 +192,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const time = rideTime.value;
         const scheduled = date && time
             ? new Date(`${date}T${time}`).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })
-            : date ? new Date(date + 'T12:00').toLocaleDateString('en-US', { dateStyle: 'full' })
+            : date
+            ? new Date(date + 'T12:00').toLocaleDateString('en-US', { dateStyle: 'full' })
             : 'ASAP';
 
         const stopsLine = calculatedData.stops.length > 0
             ? calculatedData.stops.map((s, i) => `Stop ${i + 1}: ${s}`).join('\n')
             : 'None';
 
-        confirmBtn.textContent = 'Sending...';
-        confirmBtn.disabled = true;
+        mainBtn.textContent = 'Sending...';
+        mainBtn.disabled = true;
 
         const formData = new FormData();
         formData.append('access_key',  WEB3FORMS_KEY);
@@ -212,13 +249,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 alert('Error: ' + data.message);
-                confirmBtn.textContent = 'Confirm Booking';
-                confirmBtn.disabled = false;
+                mainBtn.textContent = 'Confirm Booking';
+                mainBtn.disabled = false;
             }
         } catch {
             alert('Something went wrong. Please call us at 541-450-3693.');
-            confirmBtn.textContent = 'Confirm Booking';
-            confirmBtn.disabled = false;
+            mainBtn.textContent = 'Confirm Booking';
+            mainBtn.disabled = false;
         }
-    });
+    }
 });
