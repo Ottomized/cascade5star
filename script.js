@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const qrcodeContainer = document.getElementById("qrcode");
     if (qrcodeContainer) {
         new QRCode(qrcodeContainer, {
-            text: "tel:5414503693",
+            text: "https://www.cascade5star.com/booking",
             width: 256,
             height: 256,
             colorDark: "#000000",
