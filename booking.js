@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navbar.style.background = window.scrollY > 50
             ? 'rgba(0, 0, 0, 0.95)'
             : 'linear-gradient(to bottom, rgba(0,0,0,0.8), transparent)';
-        navbar.style.padding = window.scrollY > 50 ? '20px 40px' : '30px 40px';
+        navbar.style.padding = window.scrollY > 50 ? '6px 40px' : '6px 40px';
     });
 
     // --- Mobile menu ---
