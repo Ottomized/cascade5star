@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.style.background = 'rgba(0, 0, 0, 0.95)';
-            navbar.style.padding = '6px 40px';
+            navbar.style.padding = '0px 40px';
         } else {
             navbar.style.background = 'linear-gradient(to bottom, rgba(0,0,0,0.8), transparent)';
-            navbar.style.padding = '6px 40px';
+            navbar.style.padding = '0px 40px';
         }
     });
 

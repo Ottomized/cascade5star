@@ -40,7 +40,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 40px;
+    padding: 0px 40px;
     position: fixed;
     top: 0;
     left: 0;
@@ -62,7 +62,7 @@ body {
 }
 
 .site-logo {
-    height: 140px;
+    height: 180px;
     width: auto;
     display: block;
     border-radius: 4px;
