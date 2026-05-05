@@ -13,15 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultDistance = document.getElementById('result-distance');
     const resultTime = document.getElementById('result-time');
     const resultFare = document.getElementById('result-fare');
-    const bookRideBtn = document.getElementById('book-ride-btn');
     const stepCalculator = document.getElementById('step-calculator');
-    const stepBooking = document.getElementById('step-booking');
     const stepThankyou = document.getElementById('step-thankyou');
-    const bookingSummary = document.getElementById('booking-summary');
     const customerName = document.getElementById('customer-name');
     const customerPhone = document.getElementById('customer-phone');
     const confirmBtn = document.getElementById('confirm-btn');
-    const backBtn = document.getElementById('back-btn');
 
     // Navbar scroll
     const navbar = document.querySelector('.navbar');
@@ -109,25 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initCalculator();
 
-    // --- Step 2: Booking Form ---
-    bookRideBtn.addEventListener('click', () => {
-        bookingSummary.innerHTML = `
-            <div><strong>From:</strong> ${calculatedData.pickup}</div>
-            <div><strong>To:</strong> ${calculatedData.dropoff}</div>
-            <div><strong>Distance:</strong> ${calculatedData.distance} &nbsp;&bull;&nbsp; <strong>Est. Time:</strong> ${calculatedData.duration}</div>
-            <div class="summary-fare"><strong>Estimated Fare:</strong> ${calculatedData.fare}</div>
-        `;
-        stepCalculator.classList.add('hidden');
-        stepBooking.classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    backBtn.addEventListener('click', () => {
-        stepBooking.classList.add('hidden');
-        stepCalculator.classList.remove('hidden');
-    });
-
-    // --- Step 3: Confirm & Send Email ---
+    // --- Confirm & Send Email ---
     confirmBtn.addEventListener('click', async () => {
         const name = customerName.value.trim();
         const phone = customerPhone.value.trim();
@@ -160,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (response.ok) {
-                stepBooking.classList.add('hidden');
+                stepCalculator.classList.add('hidden');
                 stepThankyou.classList.remove('hidden');
                 lucide.createIcons();
                 window.scrollTo({ top: 0, behavior: 'smooth' });

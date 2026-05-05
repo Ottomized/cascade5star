@@ -59,24 +59,17 @@
                         <span id="result-fare" class="price-value">$0.00</span>
                     </div>
                     <p class="result-disclaimer">*Estimate based on optimal routing. Actual fares may vary.</p>
-                    <button type="button" id="book-ride-btn" class="btn primary calculator-btn booking-cta-btn">Book This Ride</button>
-                </div>
-            </div>
 
-            <!-- Step 2: Booking Form -->
-            <div id="step-booking" class="calculator-card hidden">
-                <h3 class="booking-step-title">Complete Your Booking</h3>
-                <div id="booking-summary" class="booking-summary"></div>
-                <div class="input-group">
-                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="user"></i></span>
-                    <input type="text" id="customer-name" placeholder="Your Name" autocomplete="name">
+                    <div class="input-group" style="margin-top: 25px;">
+                        <span class="input-group-icon" aria-hidden="true"><i data-lucide="user"></i></span>
+                        <input type="text" id="customer-name" placeholder="Your Name" autocomplete="name">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-icon" aria-hidden="true"><i data-lucide="phone"></i></span>
+                        <input type="tel" id="customer-phone" placeholder="Your Phone Number" autocomplete="tel">
+                    </div>
+                    <button type="button" id="confirm-btn" class="btn primary calculator-btn" style="margin-top: 10px;">Confirm Booking</button>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="phone"></i></span>
-                    <input type="tel" id="customer-phone" placeholder="Your Phone Number" autocomplete="tel">
-                </div>
-                <button type="button" id="confirm-btn" class="btn primary calculator-btn">Confirm Booking</button>
-                <button type="button" id="back-btn" class="back-btn">← Back to Estimate</button>
             </div>
 
             <!-- Step 3: Thank You -->
