@@ -805,6 +805,178 @@ a.logo {
     display: none;
 }
 
+/* ── Wineries Page ── */
+.winery-hero {
+    height: 70vh;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: url('assets/user_tesla/luxury_tours.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+.winery-hero-eyebrow {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 15px;
+}
+
+.winery-hero .hero-content h1 {
+    font-size: 4rem;
+}
+
+.active-nav {
+    color: var(--accent) !important;
+}
+
+.winery-featured {
+    padding: 100px 0;
+    background-color: var(--bg-dark);
+}
+
+.winery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.winery-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: block;
+}
+
+.winery-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+}
+
+.winery-card-image {
+    height: 180px;
+    background: linear-gradient(135deg, #0d0d0d 0%, #1c1007 50%, #0d0d0d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.winery-card-image i {
+    width: 48px;
+    height: 48px;
+    color: var(--accent);
+    opacity: 0.7;
+}
+
+/* SEO content block */
+.winery-seo {
+    padding: 60px 0;
+    background-color: #050505;
+}
+
+.seo-content {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.seo-content h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.seo-content p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+/* Full Directory */
+.winery-directory {
+    padding: 100px 0;
+    background-color: var(--bg-dark);
+}
+
+.directory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.region-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.region-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.region-dot.chelan     { background: var(--accent); }
+.region-dot.manson     { background: #e07b39; }
+.region-dot.wenatchee  { background: #5b9bd5; }
+.region-dot.leavenworth { background: #5db85d; }
+
+.directory-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.directory-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.winery-name {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+.winery-meta {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.winery-meta a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.winery-meta a:hover {
+    color: var(--accent);
+}
+
+/* Winery CTA */
+.winery-cta {
+    padding: 80px 0;
+}
+
 @media (max-width: 992px) {
     .hero-content h1 { font-size: 3.5rem; }
     .services-wrapper, .booking-grid { grid-template-columns: 1fr; }
