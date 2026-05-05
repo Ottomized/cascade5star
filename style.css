@@ -487,9 +487,8 @@ body {
     transition: opacity 0.5s ease;
 }
 
-.calculator-result.hidden {
-    display: none;
-    opacity: 0;
+.hidden {
+    display: none !important;
 }
 
 .result-details {
