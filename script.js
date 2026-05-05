@@ -77,20 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let calculatorInitialized = false;
 
     const initCalculator = () => {
-        if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
+        if (typeof google === 'undefined' || !google.maps) {
             setTimeout(initCalculator, 300);
             return;
         }
         if (calculatorInitialized) return;
         calculatorInitialized = true;
-
-        try {
-            const autocompleteOptions = { componentRestrictions: { country: 'us' } };
-            new google.maps.places.Autocomplete(pickupInput, autocompleteOptions);
-            new google.maps.places.Autocomplete(dropoffInput, autocompleteOptions);
-        } catch (e) {
-            console.error('Places Autocomplete init failed:', e);
-        }
 
         // Custom Pricing Formula (TODO: Adjust based on user needs)
         const BASE_FARE = 50;

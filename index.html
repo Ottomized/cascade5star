@@ -133,11 +133,11 @@
             <div class="calculator-card">
                 <div class="input-group">
                     <span class="input-group-icon" aria-hidden="true"><i data-lucide="map-pin"></i></span>
-                    <input type="text" id="pickup-input" placeholder="Enter pickup location" autocomplete="off" spellcheck="false">
+                    <gmp-place-autocomplete id="pickup-input" placeholder="Enter pickup location" country-restrictions="us"></gmp-place-autocomplete>
                 </div>
                 <div class="input-group">
                     <span class="input-group-icon" aria-hidden="true"><i data-lucide="navigation"></i></span>
-                    <input type="text" id="dropoff-input" placeholder="Enter drop-off location" autocomplete="off" spellcheck="false">
+                    <gmp-place-autocomplete id="dropoff-input" placeholder="Enter drop-off location" country-restrictions="us"></gmp-place-autocomplete>
                 </div>
                 <button type="button" id="calculate-btn" class="btn primary calculator-btn">Calculate Fare</button>
                 

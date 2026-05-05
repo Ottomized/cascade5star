@@ -431,12 +431,16 @@ body {
     flex-shrink: 0;
 }
 
-.input-group input {
+.input-group gmp-place-autocomplete {
+    display: block;
     width: 100%;
     position: relative;
     z-index: 1;
+}
+
+.input-group gmp-place-autocomplete::part(input) {
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.03);
-    background-image: none !important;
     border: 1px solid var(--glass-border);
     border-radius: 10px;
     padding: 18px 20px 18px 55px;
@@ -444,31 +448,13 @@ body {
     font-family: var(--font-main);
     font-size: 1rem;
     transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-/* Google Places adds .pac-target-input and can apply background art; keep a flat fill */
-.input-group input.pac-target-input {
-    background-image: none !important;
-}
-
-.input-group input:focus {
     outline: none;
+    box-sizing: border-box;
+}
+
+.input-group gmp-place-autocomplete::part(input):focus {
     border-color: var(--accent);
     background-color: rgba(255, 255, 255, 0.05);
-    background-image: none !important;
-}
-
-.input-group input:-webkit-autofill,
-.input-group input:-webkit-autofill:hover,
-.input-group input:-webkit-autofill:focus {
-    -webkit-text-fill-color: var(--text-main);
-    caret-color: var(--text-main);
-    box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.03) inset !important;
-    transition: background-color 99999s ease-out 0s;
-}
-
-.input-group input:-webkit-autofill:focus {
-    box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.05) inset !important;
 }
 
 .calculator-btn {
