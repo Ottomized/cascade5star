@@ -444,7 +444,6 @@ body {
     position: relative;
     z-index: 1;
     color-scheme: dark;
-    overflow: hidden;
 }
 
 .input-group gmp-place-autocomplete::part(input) {
