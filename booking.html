@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Ride | 5 Star Rides</title>
+    <meta name="description" content="Book your luxury Tesla ride in Central Oregon. Get an instant fare estimate.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">5 STAR <span>RIDES</span></a>
+        <ul class="nav-links">
+            <li><a href="/#experiences">Experiences</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#bitcoin">Bitcoin</a></li>
+            <li><a href="tel:5414503693" class="phone-link">541-450-3693</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <i data-lucide="menu"></i>
+        </div>
+    </nav>
+
+    <main class="booking-page">
+        <div class="container">
+            <h2 class="section-title">Book Your Ride</h2>
+            <p class="section-subtitle">Get an instant fare estimate, then book in seconds.</p>
+
+            <!-- Step 1: Fare Calculator -->
+            <div id="step-calculator" class="calculator-card">
+                <div class="input-group">
+                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="map-pin"></i></span>
+                    <gmp-place-autocomplete id="pickup-input" placeholder="Enter pickup location" country-restrictions="us"></gmp-place-autocomplete>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="navigation"></i></span>
+                    <gmp-place-autocomplete id="dropoff-input" placeholder="Enter drop-off location" country-restrictions="us"></gmp-place-autocomplete>
+                </div>
+                <button type="button" id="calculate-btn" class="btn primary calculator-btn">Calculate Fare</button>
+
+                <div id="calculator-result" class="calculator-result hidden">
+                    <div class="result-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Distance</span>
+                            <span id="result-distance" class="detail-value">--</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Est. Time</span>
+                            <span id="result-time" class="detail-value">--</span>
+                        </div>
+                    </div>
+                    <div class="result-price">
+                        <span class="price-label">Estimated Fare</span>
+                        <span id="result-fare" class="price-value">$0.00</span>
+                    </div>
+                    <p class="result-disclaimer">*Estimate based on optimal routing. Actual fares may vary.</p>
+                    <button type="button" id="book-ride-btn" class="btn primary calculator-btn booking-cta-btn">Book This Ride</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Booking Form -->
+            <div id="step-booking" class="calculator-card hidden">
+                <h3 class="booking-step-title">Complete Your Booking</h3>
+                <div id="booking-summary" class="booking-summary"></div>
+                <div class="input-group">
+                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="user"></i></span>
+                    <input type="text" id="customer-name" placeholder="Your Name" autocomplete="name">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="phone"></i></span>
+                    <input type="tel" id="customer-phone" placeholder="Your Phone Number" autocomplete="tel">
+                </div>
+                <button type="button" id="confirm-btn" class="btn primary calculator-btn">Confirm Booking</button>
+                <button type="button" id="back-btn" class="back-btn">← Back to Estimate</button>
+            </div>
+
+            <!-- Step 3: Thank You -->
+            <div id="step-thankyou" class="calculator-card hidden thankyou-card">
+                <i data-lucide="check-circle" class="thankyou-icon"></i>
+                <h2 class="thankyou-title">Thank You!</h2>
+                <p class="thankyou-message">Your driver will be contacting you shortly.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaF7FF3l7He9lVrXkU-n6OIMH6-IALVVE&libraries=places&loading=async" defer></script>
+    <script src="booking.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -541,6 +541,123 @@ body {
     text-align: center;
 }
 
+/* Regular inputs (booking form name/phone fields) */
+.input-group input {
+    width: 100%;
+    background-color: #111111;
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 18px 20px 18px 55px;
+    color: var(--text-main);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: #1a1a1a;
+}
+
+.input-group input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Booking Page */
+.booking-page {
+    min-height: 100vh;
+    padding: 140px 0 80px;
+    background-color: var(--bg-dark);
+}
+
+.booking-page .section-title,
+.booking-page .section-subtitle {
+    text-align: center;
+}
+
+.booking-page .section-subtitle {
+    margin-bottom: 40px;
+}
+
+.booking-cta-btn {
+    margin-top: 20px;
+}
+
+.booking-step-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.booking-summary {
+    margin-bottom: 25px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 2;
+}
+
+.booking-summary strong {
+    color: var(--text-main);
+}
+
+.summary-fare {
+    color: var(--accent) !important;
+    font-weight: 600;
+}
+
+.back-btn {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: var(--text-main);
+}
+
+.thankyou-card {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.thankyou-icon {
+    width: 64px;
+    height: 64px;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.thankyou-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.thankyou-message {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* Logo as link */
+a.logo {
+    text-decoration: none;
+    color: var(--text-main);
+}
+
 /* Pac Container (Google Maps Autocomplete) Styling */
 .pac-container {
     background-color: #1a1a1a;

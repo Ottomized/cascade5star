@@ -21,6 +21,7 @@
             <li><a href="#experiences">Experiences</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#bitcoin">Bitcoin</a></li>
+            <li><a href="/booking">Book Online</a></li>
             <li><a href="tel:5414503693" class="phone-link">541-450-3693</a></li>
         </ul>
         <div class="menu-toggle">
@@ -128,36 +129,9 @@
     <section id="calculator" class="calculator-section">
         <div class="container">
             <h2 class="section-title">Fare Estimate</h2>
-            <p class="section-subtitle">Get an instant quote for your luxury ride.</p>
-            
-            <div class="calculator-card">
-                <div class="input-group">
-                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="map-pin"></i></span>
-                    <gmp-place-autocomplete id="pickup-input" placeholder="Enter pickup location" country-restrictions="us"></gmp-place-autocomplete>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-icon" aria-hidden="true"><i data-lucide="navigation"></i></span>
-                    <gmp-place-autocomplete id="dropoff-input" placeholder="Enter drop-off location" country-restrictions="us"></gmp-place-autocomplete>
-                </div>
-                <button type="button" id="calculate-btn" class="btn primary calculator-btn">Calculate Fare</button>
-                
-                <div id="calculator-result" class="calculator-result hidden">
-                    <div class="result-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Distance</span>
-                            <span id="result-distance" class="detail-value">--</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Est. Time</span>
-                            <span id="result-time" class="detail-value">--</span>
-                        </div>
-                    </div>
-                    <div class="result-price">
-                        <span class="price-label">Estimated Fare</span>
-                        <span id="result-fare" class="price-value">$0.00</span>
-                    </div>
-                    <p class="result-disclaimer">*This is an estimate based on optimal routing. Actual fares may vary.</p>
-                </div>
+            <p class="section-subtitle">Get an instant quote and book your luxury ride online.</p>
+            <div style="text-align: center;">
+                <a href="/booking" class="btn primary">Get a Fare Estimate</a>
             </div>
         </div>
     </section>
@@ -197,9 +171,6 @@
 
     <!-- QRCode.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    
-    <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaF7FF3l7He9lVrXkU-n6OIMH6-IALVVE&libraries=places&loading=async" defer></script>
     
     <script src="script.js"></script>
     <script>
