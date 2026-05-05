@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Custom Pricing Formula (TODO: Adjust based on user needs)
         const BASE_FARE = 50;
-        const PER_MILE = 3.50;
+        const PER_MILE = 2.50;
         const PER_MINUTE = 0.50;
         const MINIMUM_FARE = 100;
 
