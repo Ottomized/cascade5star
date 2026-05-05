@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
         calculatorInitialized = true;
 
         // Custom Pricing Formula (TODO: Adjust based on user needs)
-        const BASE_FARE = 50;
+        const BASE_FARE = 0;
         const PER_MILE = 2.50;
-        const PER_MINUTE = 0.50;
-        const MINIMUM_FARE = 100;
+        const PER_MINUTE = 0;
+        const MINIMUM_FARE = 0;
 
         calculateBtn.addEventListener('click', () => {
             const origin = pickupInput.value;
