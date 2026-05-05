@@ -76,10 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let calculatorInitialized = false;
 
-    // Wait for Google Maps API to be available, then load Places via importLibrary
-    // (required when loading=async is used in the Maps script URL)
-    const initCalculator = async () => {
-        if (typeof google === 'undefined' || !google.maps) {
+    const initCalculator = () => {
+        if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
             setTimeout(initCalculator, 300);
             return;
         }
@@ -87,10 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
         calculatorInitialized = true;
 
         try {
-            const { Autocomplete } = await google.maps.importLibrary('places');
             const autocompleteOptions = { componentRestrictions: { country: 'us' } };
-            new Autocomplete(pickupInput, autocompleteOptions);
-            new Autocomplete(dropoffInput, autocompleteOptions);
+            new google.maps.places.Autocomplete(pickupInput, autocompleteOptions);
+            new google.maps.places.Autocomplete(dropoffInput, autocompleteOptions);
         } catch (e) {
             console.error('Places Autocomplete init failed:', e);
         }
